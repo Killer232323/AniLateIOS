@@ -1,0 +1,13 @@
+{
+  "extensions": [
+    {
+      "id": 1,
+      "name": "Yummyanime",
+      "versionName": "preview",
+      "versionCode": 1,
+      "lang": "RU",
+      "isMultidab": true,
+      "isNsfw": false
+    }
+  ]
+}
