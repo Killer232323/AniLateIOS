@@ -1,5 +1,4 @@
-{
-  "extensions": [
+[
     {
       "id": 1,
       "name": "Yummyanime",
@@ -9,5 +8,4 @@
       "isMultidab": true,
       "isNsfw": false
     }
-  ]
-}
+]
