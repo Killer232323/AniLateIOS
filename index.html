@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name='viewport'
+          content='width=device-width, shrink-to-fit=YES, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/package/Anixtar/js/script.min.js"></script>
+    <script src="/package/Yummyanime/js/script.min.js"></script>
+    <title>Tester View</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="main-view">
+    <p>Yummy</p>
+    <button id="fetch-button">Fetch Anime</button>
+    <button id="last-button">Last Anime</button>
+    <button id="detail-button">Detail Anime</button>
+    <button id="video-button">Video Anime</button>
+    <p>Anixtar</p>
+    <button id="anixtar-video-button">Video Anime</button>
+    <button id="anixtar-fetch-button">Popular Anime</button>
+    <button id="anixtar-last-button">Last Anime</button>
+    <button id="anixtar-detail-button">Detail Anime</button>
+
+</div>
+<div id="result-container">
+    <ul class="horizontal-list" id="result"></ul>
+</div>
+<script>
+    // Общая функция для получения и отображения данных
+    async function fetchList(fetchFunction) {
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = ''; // Очищаем содержимое перед загрузкой
+
+        try {
+            const response = await fetchFunction(); // Вызов функции для получения данных
+            const data = JSON.parse(response); // Парсим строку JSON в объект
+
+            data.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                <img src="${item.thumbnail_url}" alt="${item.title}">
+                <div>${item.title}</div>
+            `;
+                resultDiv.appendChild(li);
+            });
+        } catch (error) {
+            console.error('Ошибка при получении данных:', error);
+            resultDiv.innerHTML = 'Ошибка при загрузке данных: ' + error.message;
+        }
+    }
+
+    async function fetchDetail(fetchFunction) {
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = ''; // Очищаем содержимое перед загрузкой
+
+        try {
+            const response = await fetchFunction(); // Вызов функции для получения данных
+            resultDiv.innerHTML = `<div>${response}</div>`;
+        } catch (error) {
+            console.error('Ошибка при получении данных:', error);
+            resultDiv.innerHTML = 'Ошибка при загрузке данных: ' + error.message;
+        }
+    }
+
+
+    // Обработчики нажатия кнопок
+    document.getElementById('fetch-button').addEventListener('click', () => fetchList(Yummyanime1fetchPopular));
+    document.getElementById('last-button').addEventListener('click', () => fetchList(Yummyanime1fetchLatestUpdates));
+    document.getElementById('video-button').addEventListener('click', () => fetchList(Yummyanime1fetchVideos));
+    document.getElementById('detail-button').addEventListener('click', () => fetchDetail(Yummyanime1fetchDetails));
+
+    document.getElementById('anixtar-video-button').addEventListener('click', () => fetchAndDisplayData(Anixtar.FetchVideos));
+    document.getElementById('anixtar-last-button').addEventListener('click', () => fetchList(Anixtar.FetchLatestUpdates));
+    document.getElementById('anixtar-fetch-button').addEventListener('click', () => fetchList(Anixtar.FetchPopular));
+    document.getElementById('anixtar-detail-button').addEventListener('click', () => fetchDetail(Anixtar.FetchDetails));
+</script>
+</body>
+</html>
