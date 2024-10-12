@@ -66,10 +66,10 @@
 
 
     // Обработчики нажатия кнопок
-    document.getElementById('fetch-button').addEventListener('click', () => fetchList(Yummyanime1fetchPopular));
-    document.getElementById('last-button').addEventListener('click', () => fetchList(Yummyanime1fetchLatestUpdates));
-    document.getElementById('video-button').addEventListener('click', () => fetchList(Yummyanime1fetchVideos));
-    document.getElementById('detail-button').addEventListener('click', () => fetchDetail(Yummyanime1fetchDetails));
+    document.getElementById('fetch-button').addEventListener('click', () => fetchList(Yummyanime.fetchPopular));
+    document.getElementById('last-button').addEventListener('click', () => fetchList(Yummyanime.fetchLatestUpdates));
+    document.getElementById('video-button').addEventListener('click', () => fetchList(Yummyanime.fetchVideos));
+    document.getElementById('detail-button').addEventListener('click', () => fetchDetail(Yummyanime.fetchDetails));
 
     document.getElementById('anixtar-video-button').addEventListener('click', () => fetchAndDisplayData(Anixtar.FetchVideos));
     document.getElementById('anixtar-last-button').addEventListener('click', () => fetchList(Anixtar.FetchLatestUpdates));
